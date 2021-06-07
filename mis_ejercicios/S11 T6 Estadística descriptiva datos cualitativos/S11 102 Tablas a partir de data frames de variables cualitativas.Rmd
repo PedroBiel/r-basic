@@ -1,0 +1,23 @@
+---
+title: "Multivariante"
+author: "Pedro Biel"
+date: "22/2/2021"
+output: html_document
+---
+
+```{r}
+beb_energ = read.table('EnergyDrink', header = TRUE)
+str(beb_energ)
+head(beb_energ, 5)
+summary(beb_energ)
+
+apply(beb_energ, MARGIN = 2, FUN = table)  # tabla por columnas del data frame
+apply(beb_energ, MARGIN = 2, FUN = table)$sexo
+
+table(beb_energ$sexo)
+table(beb_energ)
+table(beb_energ[c(1, 3)])
+
+ftable(beb_energ)
+```
+

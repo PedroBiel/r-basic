@@ -1,0 +1,38 @@
+---
+title: "Multivariante"
+author: "Pedro Biel"
+date: "22/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Ejemplo de color de ojos y de pelo
+
+```{r}
+HairEyeColor
+str(HairEyeColor)
+head(HairEyeColor)
+sum(HairEyeColor) -> total
+```
+
+El total de individuos de la tabla de datos es `r total`.
+
+```{r}
+prop.table(HairEyeColor, margin = 3)  # Comb. marg. por género
+prop.table(HairEyeColor, margin = c(1, 2))  # Comb. marg. por color de cabello y color de ojos
+```
+
+```{r}
+aperm(HairEyeColor, perm = c('Sex', 'Hair', 'Eye'))
+```
+
+```{r}
+#library(kableExtra)
+#kable(HairEyeColor)
+```
+
+
+

@@ -1,0 +1,45 @@
+---
+title: "Tablas de Contingencia"
+author: "Pedro Biel"
+date: "16/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## La función prop.table
+
+### Ejercicio
+
+Recuperad el ejemplo de los 6 hombres y las 14 mujeres anterior y utilizando R, 
+calculad su tabla de frecuencias absolutas, su tabla de frecuencias relativas y 
+la moda.
+
+Pista: usad la función rep() para no tener que escribir los datos a mano
+
+```{r}
+datos = factor(c(rep('H', 6), c(rep('M', 14))))
+table(datos)  # Tabla de frecuencias absolutas
+prop.table(table(datos))  # Tabla de frecuencias relativas
+names(which(table(datos) == max(table(datos))))  # Moda
+```
+
+## Frecuencias relativas
+
+$$f_i = \frac{n_i}{n}$$
+
+```{r}
+prop.table(table(datos))  # Tabla de frecuencias relativas
+100 * prop.table(table(datos))  # Tabla de frecuencias relativas en tanto por 100
+table(datos) / length(datos)  # Tabla de frecuencias relativas
+names(table(datos))  # Acceder a los nombres
+names(which(table(datos) == 6))  # Devuelve los nombres que aparecen 6 veces
+moda <- function(d){
+  names(which(table(d) == max(table(d))))
+}
+m_t = moda(datos)
+```
+
+La mode del data frame es: `r m_t`.

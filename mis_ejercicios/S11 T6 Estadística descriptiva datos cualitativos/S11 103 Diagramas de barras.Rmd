@@ -1,0 +1,16 @@
+---
+title: "Multivariante"
+author: "Pedro Biel"
+date: "22/2/2021"
+output: html_document
+---
+
+```{r}
+beb_energ = read.table('EnergyDrink', header = TRUE)
+barplot(table(beb_energ$sexo), col = c('lightblue', 'pink'),
+        main = "Diagrama de barras de las frecuencias absolutas\n de la variable \"Sexo\"")
+barplot(prop.table(table(beb_energ$bebe)), main = "Diagrama de barras de las frecuencias relativas\n de la variable \"bebe\"")
+```
+
+
+

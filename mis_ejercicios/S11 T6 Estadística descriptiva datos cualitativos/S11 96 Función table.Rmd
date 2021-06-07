@@ -1,0 +1,19 @@
+---
+title: "Tablas de Contingencia"
+author: "Pedro Biel"
+date: "16/2/2021"
+output: html_document
+---
+
+
+## Tablas de contingencia
+
+```{r}
+datos = factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
+table(datos)
+table(datos)['M']  # Tabla de frecuencia del nivel 'M'.
+sum(table(datos))
+```
+
+
+

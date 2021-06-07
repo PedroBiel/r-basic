@@ -1,0 +1,36 @@
+---
+title: "Tablas de contingencia"
+author: "Pedro Biel"
+date: "16/2/2021"
+output: html_document
+---
+
+
+## Paquete `gmodels`
+
+```{r}
+library(gmodels)
+respuestas = sample(c('Sí', 'No'), size = 11, replace = T)
+sexo = sample(c('H', 'M'), size = length(respuestas), replace = T)
+table(respuestas, sexo)
+CrossTable(sexo, respuestas, prop.chisq = F)
+```
+
+## Sumas por filas y columnas
+
+```{r}
+tt <- table(sexo, respuestas)  # Frecuencias absolutas
+tt
+prop.table(tt)  # Global
+prop.table(tt, margin = 1)  # Frecuencias relativas por filas (sexo)
+prop.table(tt, margin = 2)  # Frecuencias relativas por columnas (respuestas)
+colSums(tt)
+rowSums(tt)
+colSums(prop.table(tt))
+rowSums(prop.table(tt))
+```
+
+```{r}
+apply(tt, FUN = sum, MARGIN = 1)
+```
+

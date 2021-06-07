@@ -1,0 +1,137 @@
+---
+title: "Tarea 10 Estudio de recién nacidos"
+author: "Pedro Biel"
+date: "23/2/2021"
+output: html_document
+---
+
+Instala y carga el paquete `MASS`.
+
+En el hay una tabla de datos llamada `birthwt` sobre factores que pueden incidir en el peso de los niños al nacer. 
+
+```{r}
+library(MASS)
+```
+
+
+# Preguntas de esta tarea
+
+## 1. Utiliza `str()` y `head()` para explorar la estructura, y con `help()`, mirar el significado de cada variable.
+
+```{r}
+str(birthwt)
+head(birthwt)
+help(birthwt)
+```
+
+
+## 2. Calcula una tabla de frecuencias relativas marginales de los pares (raza de la madre, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre influye en el peso del bebé.
+
+```{r}
+prop.table(table(birthwt$low, birthwt$race), margin = 1)
+
+raza <- factor(birthwt$race, labels = c('blanca', 'negra', 'otra'))
+peso <- factor(birthwt$low, labels = c('>=  2.5 kg', ' < 2.5 kg'))
+round(prop.table(table(peso, raza), margin = 1), 3)
+```
+
+## 3. Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+
+```{r}
+plot(table(raza, peso), 
+     main = 'Gráfico de mosaico de la raza y el peso de nacimiento',
+     col = c('white', 'gray')
+     )
+```
+
+## 4. Dibuja un diagrama bidimensional de barras, con las barras organizadas en bloques, que permita visualizar la información de los ejercicios anteriores. Aprovecha para nombres adecuados a los bloques, colores a las barras, y añadir una leyenda que explique qué representa cada barra.
+
+```{r}
+barplot(prop.table(table(raza, peso), margin = 1), beside = TRUE,
+        legend.text = TRUE, ylim = c(0, 0.8),
+        col = c('white', 'black', 'gray'),
+        main = 'Frecuencias relativas del peso de nacimiento según la raza'
+        )
+```
+
+
+## 5. ¿Se puede obtener alguna conclusión de la tabla y el diagrama de barras anterior? Argumenta tu respuesta
+
+Según la tabla la raza blanca acumula más de un 56 % de los nacimientos con un peso igual o mayor a 2.5 kg, mientras que la raza negra está en último lugar con un 11.5 %.
+
+Con los nacimientos con un peso inferior a 2.5 kg la raza blanca y otras están más igualadas en porcentaje, mientras que la raza negra sigue en último lugar.
+
+El el gráfico se ve que el mayor porcentaje de nacimientos con un peso igual o mayor que 2.5 kg es la raza blanca, seguida de otra y la raza negra.
+
+
+## 6. Repite los cuatro ejercicios anteriores para los pares (madre fumadora o no, peso inferior a 2.5 kg o no) y para los pares (madre hipertensa o no, peso inferior a 2.5 kg o no.
+
+```{r}
+prop.table(table(birthwt$low, birthwt$smoke), margin = 1)
+
+fuma <- factor(birthwt$smoke, labels = c('no', 'sí'))
+peso <- factor(birthwt$low, labels = c('>=  2.5 kg', ' < 2.5 kg'))
+round(prop.table(table(peso, fuma), margin = 1), 3)
+
+plot(table(fuma, peso), 
+     main = 'Gráfico de mosaico de si fuma y el peso de nacimiento',
+     col = c('white', 'gray')
+     )
+
+barplot(prop.table(table(fuma, peso), margin = 1), beside = TRUE,
+        legend.text = TRUE, ylim = c(0, 0.8),
+        col = c('white', 'black'),
+        main = 'Frecuencias relativas del peso de nacimiento según fuma o no'
+        )
+```
+
+Supongo que `smoke = 0` es no fumadora y `smoke = 1` es fumadora.
+
+Según los resultados los neonatos de madres no fumadoras tienden a tener mayor peso.
+
+```{r}
+prop.table(table(birthwt$low, birthwt$ht), margin = 1)
+
+hipertensa <- factor(birthwt$ht, labels = c('no', 'sí'))
+peso <- factor(birthwt$low, labels = c('>=  2.5 kg', ' < 2.5 kg'))
+round(prop.table(table(peso, hipertensa), margin = 1), 3)
+
+plot(table(hipertensa, peso), 
+     main = 'Gráfico de mosaico de si es hipertensa y el peso de nacimiento',
+     col = c('white', 'gray')
+     )
+
+barplot(prop.table(table(hipertensa, peso), margin = 1), beside = TRUE,
+        legend.text = TRUE, ylim = c(0, 0.8),
+        col = c('white', 'black'),
+        main = 'Frecuencias relativas del peso de nacimiento según si es hipertensa'
+        )
+```
+
+Supongo que `ht = 0` es no hipertensa y `ht = 1` es hipertensa.
+
+Según los resultados los neonatos de madres hipertensas tienden a tener menor peso.
+
+## 7. Calcula una tabla de frecuencias relativas marginales de las ternas (raza de la madre, madre fumadora o no, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre y su condición de fumadora o no fumadora influyen en el peso del bebé.
+
+```{r}
+prop.table(table(birthwt$low, birthwt$smoke, birthwt$race), margin = 1)
+
+raza <- factor(birthwt$race, labels = c('blanca', 'negra', 'otra'))
+fuma <- factor(birthwt$smoke, labels = c('no', 'sí'))
+peso <- factor(birthwt$low, labels = c('>=  2.5 kg', ' < 2.5 kg'))
+round(prop.table(table(peso, fuma, raza), margin = 2), 3)
+```
+
+En todas las razas, si la madre no fuma, el peso del neonato tiende a ser mayor.
+
+
+## 8. Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+
+```{r}
+plot(prop.table(table(peso, fuma, raza), margin = 2),
+     col = c('white', 'black', 'gray'),
+     main = 'Gráfico de mosaico de las frecuencias relativas según \nraza, fumadora y peso del recien nacido'
+)
+```
+

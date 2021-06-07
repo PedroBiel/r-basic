@@ -1,0 +1,47 @@
+---
+title: "Tablas de Contingencia"
+author: "Pedro Biel"
+date: "16/2/2021"
+output: html_document
+---
+
+
+```{r}
+respuestas = sample(c('Sí', 'No'), size = 12, replace = T)
+sexo = sample(c('H', 'M'), size = length(respuestas), replace = T)
+table(respuestas, sexo)
+```
+
+## Ejercicio
+
+
+* Comprobad qué ocurre si cambiamos el orden de las columnas en la función table()
+* Usad la función t() para transponer ambas tablas y comprobad el resultado
+
+```{r}
+table(sexo, respuestas)
+t(respuestas)
+t(sexo)
+table(t(respuestas), t(sexo))
+table(t(sexo), t(respuestas))
+```
+
+```{r}
+table(respuestas, sexo)
+table(respuestas, sexo)[1, 2]
+table(respuestas, sexo)['No', 'M']
+```
+
+## Frecuencia relativa global
+
+```{r}
+prop.table(table(sexo, respuestas))  # Global
+```
+
+## Frecuencia relativa marginal
+
+```{r}
+prop.table(table(sexo, respuestas), margin = 1)  # Por filas (sexo)
+prop.table(table(sexo, respuestas), margin = 2)  # Por columnas (respuesta)
+```
+
