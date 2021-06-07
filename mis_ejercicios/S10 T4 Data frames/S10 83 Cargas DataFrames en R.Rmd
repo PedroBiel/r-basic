@@ -1,0 +1,27 @@
+---
+title: "R DataFrames - Carga de DF"
+author: "Pedro Biel"
+date: "13/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Carga de fichero local
+
+Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
+
+```{r}
+df = read.table("../S10 T4 Data frames/datos/iris.csv", header = TRUE)
+head(df)
+str(df)
+```
+
+```{r}
+df = read.csv("../S10 T4 Data frames/datos/iris.csv", header = TRUE)
+head(df)
+str(df)
+```
+

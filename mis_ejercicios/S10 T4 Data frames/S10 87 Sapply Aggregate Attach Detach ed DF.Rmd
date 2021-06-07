@@ -1,0 +1,61 @@
+---
+title: "Funciones en DF"
+author: "Pedro Biel"
+date: "13/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Función `sapply`
+
+```{r}
+str(iris)
+sapply(subset(iris, select=1:4), mean)
+sapply(iris[, 1:4], sum)
+f = function(x){sqrt(sum(x^2))}
+sapply(iris[, 1:4], f)
+```
+
+```{r}
+df = data.frame(C1 = c(1, 2, NA, 4), C2 = c(5, NA, 2, 3))
+sapply(df, mean)
+sapply(df, mean, na.rm = TRUE)
+```
+
+## Función `aggregate`
+
+```{r}
+aggregate(Sepal.Length ~ Species, data = iris, FUN = mean, na.rm = TRUE)
+aggregate(cbind(Sepal.Length, Petal.Length) ~ Species, data = iris, FUN = mean, na.rm = TRUE)
+```
+
+```{r}
+head(mtcars)
+str(mtcars)
+mtcars$cyl = as.factor((mtcars$cyl))
+mtcars$gear = as.factor((mtcars$gear))
+mtcars$carb = as.factor((mtcars$carb))
+str(mtcars)
+aggregate(mpg~cyl+gear+carb, data=mtcars, FUN=mean, na.rm=TRUE)
+```
+
+## Función `attach`
+
+```{r}
+attach(mtcars)
+mpg
+cyl
+```
+
+## Función `detach`
+
+```{r}
+detach(mtcars)
+mpg = "Hola que tal"
+attach(mtcars)
+mpg
+```
+

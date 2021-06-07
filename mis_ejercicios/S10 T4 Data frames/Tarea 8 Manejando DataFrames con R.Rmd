@@ -1,0 +1,88 @@
+---
+title: 'Tarea 8: Manejando DataFrames con R'
+author: "Pedro Biel"
+date: "13/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Carga en R o en Python el CSV de la web http://winterolympicsmedals.com/medals.csv y responde a las preguntas de la tarea.
+
+```{r}
+df = read.csv("../S10 T4 Data frames/datos/medals.csv", header=TRUE)
+head(df)
+str(df)
+summary(df)
+```
+
+# Preguntas de esta tarea
+
+# Pregunta 1
+¿Cuantos deportistas aparecen en el data frame?
+
+
+```{r}
+nrow(df)
+```
+
+# Pregunta 2
+¿Cuantos han ganado medallas de oro, cuantos de plata y cuantos de bronce?
+
+Medallas de oro:
+
+```{r}
+sum(df$Medal == "Gold")
+```
+
+Medallas de plata:
+
+```{r}
+sum(df$Medal == "Silver")
+```
+
+Medallas de bronce:
+
+```{r}
+sum(df$Medal == "Bronze")
+```
+
+# Pregunta 3
+¿En cuantos lugares se han hecho olimpiadas de invierno?
+
+```{r}
+length(unique(df[["City"]]))
+```
+
+# Pregunta 4
+¿Cuantos hombres y cuantas mujeres hay?
+
+Hombres:
+```{r}
+sum(df$Event.gender == "M")
+```
+
+Mujeres:
+```{r}
+sum(df$Event.gender == "W")
+```
+
+# Pregunta 5
+¿En qué año participaron más deportistas?
+
+```{r}
+tabla = table(df$Year)
+names(tabla[tabla == max(tabla)])
+```
+
+
+# Pregunta 6
+El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?
+
+```{r}
+tabla = table(df$NOC)
+names(tabla[tabla == max(tabla)])
+```
+

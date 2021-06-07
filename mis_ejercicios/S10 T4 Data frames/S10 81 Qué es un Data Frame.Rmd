@@ -1,0 +1,21 @@
+---
+title: "R Data Frames"
+author: "Pedro Biel"
+date: "11/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+df = iris
+head(df, 5)
+tail(df, 5)
+str(df)  # Estructura de los datos (tipos)
+names(df)  # Nombres de las columnas
+```
+
