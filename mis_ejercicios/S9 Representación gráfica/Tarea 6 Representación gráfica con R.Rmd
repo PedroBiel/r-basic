@@ -1,0 +1,116 @@
+---
+title: 'Tarea 6: Introducción a la representación gráfica con $R$'
+author: "Pedro Biel"
+date: "8/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preguntas de esta tarea
+
+### Pregunta 1
+
+Con una sola instrucción, dibujad el gráfico de la función y=x^2−3x+30 entre −15 y 15. De título, poned “Una parábola”. De etiquetas, en el eje 0X poned, en formato matemático, "x"; y en el eje 0Y, introducid $y=x^2−3x+30$, también en formato matemático. Tenéis que utilizar la función curve().
+
+```{r}
+y = function(x){x^2 - 3 * x + 30}
+curve(y,
+      xlim = c(-15,15),
+      main = "Una parábola",
+      xlab = expression(x),
+      ylab = expression(y == x^2 - 3 * x + 30)
+)
+```
+
+### Pregunta 2
+
+Considerando lo que habéis obtenido en el ejercicio anterior y siendo y = f(x) = x^2−3x+30 e I = [-15:15], si en vez de utilizar la función curve(), utilizamos la función plot(), ¿es correcta la sentencia plot(f(I)) para representar la curva f en el intervalo I? En otras palabras, dan ambas sentencias la misma gráfica? Obviamente, en la sentencia plot(f(I)) se han omitido el resto de parámetros requeridos en el ejercicio anterior porque no influyen para nada en la curva. Tanto si la respuesta es afirmativa como negativa, cread la función f en R y argumentad vuestra respuesta, considerando todos los parámetros requeridos (título y etiquetas de ambos ejes).
+
+```{r}
+plot(y(-15:15),
+     main = "Una parábola",
+      xlab = expression(x),
+      ylab = expression(y == x^2 - 3 * x + 30)
+)
+```
+
+No. Aparentemente la curva es la misma, pero desplazada en el eje $x$.
+
+### Pregunta 3
+
+Dibuja un gráfico semilogarítmico de la función y = 5\cdot 2^x entre -10 y 25. Utilizad la función curve(). Mostrad solo la etiqueta del eje 0Y, que ponga $y = 5\cdot 2^x$ en formato matemático.
+
+```{r}
+y = function(x){5 * 2^x}
+curve(y,
+      xlim = c(-10,25),
+      log = "y",
+      xlab = "",
+      ylab = expression(y == 5 %.% 2^x)
+      )
+```
+
+### Pregunta 4
+
+Dibuja el gráfico de la función y_1 = 3x utilizando la función curve(). Añade la curva y_2=-3x, entre -10 y 20. El gráfico no debe mostrar ninguna etiqueta. La primera curva debe ser de color azul y la segunda, de color verde. Ponedle de título "2 rectas" y de subtítulo "Dos rectas con pendiente opuesto". Añadid al gráfico un recuadro (con la esquina superior izquierda en el punto (13,10)) que indique que la función 3x es la azul y la -3x verde.
+
+```{r}
+y1 = function(x){3 * x}
+y2 = function(x){-3 * x}
+curve(y1, col = "blue", xlim = c(-10,20), 
+      main = "2 rectas", sub = "Dos rectas con pendiente opuesto",
+      xlab = "", ylab = ""
+      )
+curve(y2, col = "green", add = TRUE)
+rect(13, -5, 19, 10)
+text(13, 5, labels = "—— y = 3x", pos = 4, col = "blue")
+text(13, 0, labels = "—— y = -3x", pos = 4, col = "green")
+```
+
+## Pregunta 5
+
+Dad la instrucción que añada a un gráfico anterior la recta horizontal y = 0 de color rojo con un grosor de 5 puntos.
+
+```{r}
+y1 = function(x){3 * x}
+y2 = function(x){-3 * x}
+curve(y1, col = "blue", xlim = c(-10,20), 
+      main = "2 rectas", sub = "Dos rectas con pendiente opuesto",
+      xlab = "", ylab = ""
+      )
+curve(y2, col = "green", add = TRUE)
+rect(13, -5, 19, 10)
+text(13, 5, labels = "—— y = 3x", pos = 4, col = "blue")
+text(13, 0, labels = "—— y = -3x", pos = 4, col = "green")
+
+# Añade línea horizontal
+abline(h = 0, col = "red", lwd = 5)
+```
+
+## Pregunta 6
+
+Dad la instrucción que añada a un gráfico anterior la recta y = 2x+7 de color azul con un grosor de 2 puntos.
+
+```{r}
+y1 = function(x){3 * x}
+y2 = function(x){-3 * x}
+curve(y1, col = "blue", xlim = c(-10,20), 
+      main = "2 rectas", sub = "Dos rectas con pendiente opuesto",
+      xlab = "", ylab = ""
+      )
+curve(y2, col = "green", add = TRUE)
+rect(13, -5, 19, 10)
+text(13, 5, labels = "—— y = 3x", pos = 4, col = "blue")
+text(13, 0, labels = "—— y = -3x", pos = 4, col = "green")
+
+# Añade línea horizontal
+abline(h = 0, col = "red", lwd = 5)
+
+# Añade línea
+y = function(x){2 * x + 7}
+curve(y, col = "blue", lwd = 2, add = TRUE)
+```
+
