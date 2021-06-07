@@ -1,0 +1,13 @@
+# Parámetros de los chunks
+
+Código |  Significado                                  
+---|---
+`echo` | `TRUE` es el valor por defecto, muestra el código fuente del chunk. `FALSE`, no se mostrará.
+`eval` | `TRUE` es el valor por defecto, evalúa el código. `FALSE` no lo evalúa.
+`message` | `TRUE` es el valor por defecto, muestra los mensajes de R al ejecutar el código. `FALSE` no muestra los mensajes.
+`warning` | `TRUE` es el valor por defecto, muestra los mensajes de advertencia que se producen a veces al ejecutar algunas funciones. `FALSE` no los muestra.
+`comment` | `NA` no muestra los `##` en las salidas.
+`results = markup` | Valor por defecto. Nos muestra los resultados en el documento final línea a línea, encabezados por ##.
+`results = hide` | No se nos muestra el resultado en el documento final.
+`results = asis` | Devuelve los resultados línea a línea de manera literal en el documento final y el programa con el que se abre el documento final los interpreta como texto.
+`results = hold` | Muestra todos los resultados al final del bloque de código.

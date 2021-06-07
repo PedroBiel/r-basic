@@ -1,0 +1,74 @@
+---
+title: "Documentación de texto"
+author: "Pedro Biel"
+date: "20/1/2021"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Título 1
+
+## Título 2
+
+### Título 3
+
+#### Título 4
+
+##### Título 5
+
+Texto llano. Se puede escribir texto acompañado de código `R` y fórmulas $LaTeX$.
+
+Esto es una nueva línea.
+
+Esto es *un texto en cursiva* y esto también es _un texto en cursiva_.
+
+Esto es **un texto en negrita** y esto también es __un texto en negrita__.
+
+Superíndices con *sombrero*: 2^3^ = 8.
+
+Para tachar doble tilde: ~~tachado~~.
+
+link: [link](https://pedrobiel.github.io/)
+
+endash: --Y dijo...
+
+emdash: ---Y dijo...
+
+elipsis: ...
+
+ecuaciones en línea $S = \pi· r²$.
+
+imagen ![Joda](D:\Imágenes\png\Star Wars png\png\Master Joda.png)
+imagen ![robot](D:\Imágenes\png\Robots\robot_1.png)
+<img src="D:\Imágenes\png\Robots\robot_1.png" width="100" height="100">
+
+Barra divisoria
+
+***
+
+> Cita en bloque.
+
+Lista no ordenada:
+
+* Item 1
+* Item 2
+  + Subitem 2.1
+  + Subitem 2.2
+* Item 3
+
+Lista ordenada:
+
+1. Primer item
+2. Segundo item
+3. Tercer item
+1. Cuarto item
+1. Quinto item
+
+Alumno | Nota
+---|---
+Juan | 4,5
+Ricardo | 7,4
+María | 8,4
+Belén | 5,4
+

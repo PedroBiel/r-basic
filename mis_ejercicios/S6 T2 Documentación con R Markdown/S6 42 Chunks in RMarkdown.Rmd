@@ -1,0 +1,10 @@
+# Chunks de R
+
+Bloque de código R dentro de un documento R Markdown:
+
+$\sqrt{2} - e^{-2}$:
+
+```{r nombre_de_chunk}
+sqrt(2) - exp(-2)
+```
+

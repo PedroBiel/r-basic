@@ -1,0 +1,61 @@
+# Fracciones
+
+$\frac{a}{b}$
+$\dfrac{a}{b}$
+$\left(\dfrac{a}{b}\right)$
+
+# Matrices
+
+$$\begin{matrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{matrix}$$
+
+$$\begin{pmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{pmatrix}$$
+
+$$\begin{vmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{vmatrix}$$
+
+$$\begin{bmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{bmatrix}$$
+
+$$\begin{Bmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{Bmatrix}$$
+
+$$\begin{Vmatrix}
+a_{11} & a_{12} & a_{13}\\
+a_{21} & a_{22} & a_{23}
+\end{Vmatrix}$$
+
+# Sistema de ecuaciones
+
+$$\left.\begin{array}{l}
+ax+by=c\\
+ex-fy=g
+\end{array}\right\}$$
+
+Nota:
+
+`\left.` : para indicar que no se quiere símbolo al abrir a la izquierda.
+
+`{l}` : alineado a la izquierda.
+
+$$|x| = \left\{\begin{array}{rl}
+-x & \text{si } x \le 0\\
+x & \text{si } x \ge 0
+\end{array}\right.$$
+
+Nota:
+
+`{rl}` : la primera columan alineada a la derecha y la segunda columna alineada a la izquierda.
+
+`\right.` : no se quiere símbolo al cerrar a la derecha.

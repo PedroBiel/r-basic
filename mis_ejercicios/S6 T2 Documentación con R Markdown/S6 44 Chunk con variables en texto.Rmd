@@ -1,0 +1,17 @@
+# Los chunks en modo línea
+
+Cuando queremos hacer la raíz cuadrada de 2, podemos hacerlo de las siquientes formas:
+
+- En $\LaTeX$: $\sqrt{2}$
+- En `R` haciendo `r sqrt(2)`
+- La frase completa: $\sqrt{2}=$ `r sqrt(2)`
+
+
+```{r prueba, results='hide', echo=FALSE}
+notas = c(5,7,9,2,6,8)
+media = mean(notas)
+n = length(notas)
+desv.tip = sd(notas)
+```
+
+Este año he hecho $n=$ `r n` exámenes, con una media $\overline{x}=$ `r round(media, 2)` y una desviación típica de $s=$ `r round(desv.tip, 2)`.
