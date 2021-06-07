@@ -1,0 +1,135 @@
+---
+title: "Ejercicio 3"
+author: "Pedro Biel"
+date: "10/3/2021"
+output: html_document
+---
+
+# Repetir el ejemplo S14 139 para la muestra de notas de bachillerato
+
+```{r}
+notas = c(7, 10, 2, 2, 6, 2, 5, 4, 9, 2, 7, 5, 1, 7, 0, 3, 10, 2, 10, 4, 1, 4, 5, 4, 0, 5, 10, 4, 3, 0, 7, 5, 10, 3, 4, 8, 1, 9, 3, 7, 9, 1, 9, 10, 5, 10, 10, 9, 5, 0, 3, 1, 3, 2, 0, 6, 6, 4, 7, 4, 7, 3, 9, 0, 7, 0, 3, 0, 3, 3, 1, 4, 10, 9, 1, 4, 0, 6, 10, 0, 10, 1, 0, 2, 6, 4, 8, 2, 3, 7, 7, 3, 3, 8, 2, 6, 6, 2, 8, 9)
+notas
+```
+
+```{r}
+L = c(0, 5, 7, 9, 10)
+```
+
+```{r}
+notasHist = hist(notas, breaks = L, right = FALSE, include.lowest = TRUE, plot = FALSE)
+FAbs = notasHist$count
+FRel = prop.table(FAbs)
+FAbsCum = cumsum(FAbs)
+FRelCum = cumsum(FRel)
+```
+
+```{r}
+intervalos = c('[0, 5)', '[5, 7)', '[7, 9)', '[9, 10)')
+calificaciones = c('Suspenso', 'Aprobado', 'Notable', 'Excelente')
+marcas = notasHist$mids
+tabla.Fr = data.frame(intervalos, calificaciones, marcas, FAbs, FAbsCum, FRel, FRelCum)
+tabla.Fr
+```
+
+Ahora ya podemos calcular los estadísticos:
+
+```{r}
+TOT = tabla.Fr$FAbsCum[4]
+TOT
+```
+
+## Media:
+
+```{r}
+anchura.media = round(sum(tabla.Fr$FAbs * tabla.Fr$marcas) / TOT, 3)
+anchura.media
+```
+
+## Varianza:
+
+```{r}
+anchura.var = round(sum(tabla.Fr$FAbs * tabla.Fr$marcas^2) / TOT - anchura.media^2, 3)
+anchura.media
+```
+
+## Desviación típica:
+
+```{r}
+anchura.dt = round(sqrt(anchura.var), 3)
+anchura.dt
+```
+
+## Intervalo modal:
+
+```{r}
+I.modal = tabla.Fr$intervalos[which(tabla.Fr$FAbs == max(tabla.Fr$FAbs))]
+I.modal
+```
+
+## Intervalo crítico
+
+```{r}
+I.critico = tabla.Fr$intervalos[which(tabla.Fr$FRelCum >= 0.5)]
+I.critico[1]
+```
+
+## Aproximación de la mediana de los datos "reales".
+
+```{r}
+n = TOT
+Lc = L[1]
+Lc.pos = L[2]
+Ac = L[2] - L[1]
+Nc.ant =0  # tabla.Fr$FAbsCum[1]
+nc = tabla.Fr$FAbs[1]
+M = Lc + Ac * ((n/2) - Nc.ant) / nc
+M
+```
+
+### Mediana de los datos reales
+
+```{r}
+median(notas)
+```
+
+## Primer cuantil
+
+```{r}
+aprox.quantile.p = function(Lcrit, Acrit, n, p, Ncrit.ant, ncrit){
+  round(Lcrit + Acrit * (p * n - Ncrit.ant) / ncrit, 3)
+}
+aprox.quantile.p(Lc, Ac, n, 0.25, Nc.ant, nc)
+```
+
+```{r}
+aprox.quantile.p(Lc, Ac, n, 0.75, Nc.ant, nc)
+```
+
+### Cuantiles "reales"
+
+```{r}
+quantile(notas, 0.25)
+```
+
+```{r}
+quantile(notas, 0.75)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

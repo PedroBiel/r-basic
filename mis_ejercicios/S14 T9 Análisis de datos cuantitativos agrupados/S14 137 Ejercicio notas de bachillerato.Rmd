@@ -1,0 +1,104 @@
+---
+title: 'Ejercicio: Notas de bachillerato'
+author: "Pedro Biel"
+date: "10/3/2021"
+output: html_document
+---
+
+```{r}
+notas = c(7, 10, 2, 2, 6, 2, 5, 4, 9, 2, 7, 5, 1, 7, 0, 3, 10, 2, 10, 4, 1, 4, 5, 4, 0, 5, 10, 4, 3, 0, 7, 5, 10, 3, 4, 8, 1, 9, 3, 7, 9, 1, 9, 10, 5, 10, 10, 9, 5, 0, 3, 1, 3, 2, 0, 6, 6, 4, 7, 4, 7, 3, 9, 0, 7, 0, 3, 0, 3, 3, 1, 4, 10, 9, 1, 4, 0, 6, 10, 0, 10, 1, 0, 2, 6, 4, 8, 2, 3, 7, 7, 3, 3, 8, 2, 6, 6, 2, 8, 9)
+notas
+```
+
+#Definimos vector de extremos
+
+```{r}
+L = c(0, 5, 7, 9, 10)
+```
+
+#Definimos notas1 como el resultado de la codificación en intervalos utilizando como etiquetas los propios intervalos
+
+```{r}
+notas1 = cut(notas, breaks = L, right = FALSE, include.lowest = TRUE)
+notas1
+```
+
+#Definimos las marcas de clase
+
+```{r}
+MC = (L[1:length(L) - 1] + L[2:length(L)]) / 2
+MC
+```
+
+#Definimos notas2 como el resultado de la codificación en intervalos utilizando como etiquetas las marcas de clase
+
+```{r}
+notas2 = cut(notas, breaks = L, labels = MC, right = FALSE, include.lowest = TRUE)
+notas2
+```
+
+#Definimos notas3 como el resultado de la codificación en intervalos utilizando como etiquetas la posición ordenada del intervalo (1, 2, 3 o 4)
+
+```{r}
+notas3 = cut(notas, breaks = L, labels = FALSE, right = FALSE, include.lowest = TRUE)
+notas3
+```
+
+#Definimos notas4 como el resultado de la codificación en intervalos utilizando como etiquetas Susp, Aprob, Not y Exc
+
+```{r}
+notas4 = cut(notas, breaks = L, labels = c('Susp', 'Aprob', 'Not', 'Exc'), right = FALSE, include.lowest = TRUE)
+notas4
+```
+
+#Trabajaremos ahora con notas4 y calcularemos sus frecuencias
+
+## Frecuencias absolutas
+
+```{r}
+table(notas4)
+```
+
+## Frecuencias relativas
+
+```{r}
+prop.table(table(notas4))
+```
+
+## Frecuencias absolutas acumuladas
+
+```{r}
+cumsum(table(notas4))
+```
+
+## Frecuencias relativas acumuladas
+
+```{r}
+cumsum(prop.table(table(notas4)))
+```
+
+## Podríamos haber obtenido todo lo anterior haciendo uso de la función `hist`.
+
+```{r}
+notasHist = hist(notas, breaks = L, right = FALSE, include.lowest = TRUE, plot = FALSE)
+FAbs = notasHist$count
+FRel = prop.table(FAbs)
+FAbsCum = cumsum(FAbs)
+FRelCum = cumsum(FRel)
+```
+
+## Ahora ya podemos crear un data frame con todas estas frecuencias:
+
+```{r}
+intervalos = c('[0, 5)', '[5, 7)', '[7, 9)', '[9, 10)')
+calificaciones = c('Suspenso', 'Aprobado', 'Notable', 'Excelente')
+marcas = notasHist$mids
+tabla.Fr = data.frame(intervalos, calificaciones, marcas, FAbs, FAbsCum, FRel, FRelCum)
+tabla.Fr
+```
+
+
+
+
+
+

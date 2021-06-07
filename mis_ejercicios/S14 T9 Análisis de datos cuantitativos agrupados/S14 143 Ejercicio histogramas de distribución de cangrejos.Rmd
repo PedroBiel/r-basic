@@ -1,0 +1,137 @@
+---
+title: "Ejercicio histogramas de la distribución de los cangrejos"
+author: "Pedro Biel"
+date: "11/3/2021"
+output: html_document
+---
+
+```{r}
+crabs = read.table('datacrab.txt', header = TRUE)
+str(crabs)
+cw = crabs$width
+cw
+```
+
+
+```{r}
+A = diff(range(cw) / nclass.scott(cw))
+A = ceiling(A * 10)
+A = A / 10
+A
+```
+
+```{r}
+L1 = min(cw) - (1/2 * 0.1)  # El mínimo menos la mitad de la precisión
+L1
+```
+
+```{r}
+L = L1 + A * (0:10)
+L
+```
+
+## Dibujamos el histograma con hist y luego observamos su información interna.
+
+```{r}
+h = hist(cw, breaks = L, right = FALSE, main = 'Histograma de las anchuras de los cangrejos.')
+```
+
+## Obtener diferentes valores
+
+```{r}
+hist(cw, breaks = L, right = FALSE, plot = FALSE)
+```
+
+```{r}
+histAbs = function(x,L) {
+  h = hist(x, breaks = L, right = FALSE, freq = FALSE,
+           xaxt = "n", yaxt = "n", col = "lightgray", 
+           main = "Histograma de frecuencias absolutas", 
+           xlab = "Intervalos y marcas de clase",ylab = "Frecuencias absolutas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels=h$counts, col="purple") 
+  }
+```
+
+```{r}
+histAbs(cw, L)
+```
+
+```{r}
+histAbsCum = function(x,L) {
+  h = hist(x, breaks = L, right = FALSE , plot = FALSE) 
+  h$density = cumsum(h$density)
+  plot(h, freq = FALSE, xaxt = "n", yaxt = "n", col = "lightgray", 
+       main = "Histograma de frecuencias\nabsolutas acumuladas", xlab = "Intervalos", 
+       ylab = "Frec. absolutas acumuladas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels = cumsum(h$counts), col = "purple") 
+  }
+```
+
+```{r}
+histAbsCum(cw, L)
+```
+
+```{r}
+histAbs(cw, L)
+rug(cw)
+```
+
+```{r}
+histAbs(cw, L)
+rug(jitter(cw))
+```
+
+```{r}
+str(density(cw))
+```
+
+```{r}
+histRel = function(x,L) {
+  h = hist(x, breaks=L, right=FALSE , plot=FALSE)
+  t = round(1.1*max(max(density(x)[[2]]),h$density),2) 
+  plot(h, freq = FALSE, col = "lightgray", 
+       main = "Histograma de frec. relativas\ny curva de densidad estimada", 
+       xaxt="n", ylim=c(0,t), xlab="Intervalos", ylab="Densidades")
+  axis(1, at = L) 
+  text(h$mids, h$density/2, labels = round(h$counts/length(x),2), col = "blue")
+  lines(density(x), col = "purple", lwd = 2) 
+  }
+```
+
+```{r}
+histRel(cw, L)
+```
+
+```{r}
+histRel(cw, L)
+curve(dnorm(x, mean(cw), sd(cw)), col = 'cyan', lty = 4, lwd = 2, add = TRUE)
+legend('topright', lwd = c(2, 2), lty = c(1, 4), col = c('purple', 'cyan4'), legend = c('Densidad estimada', 'Densidad normal'))
+```
+
+```{r}
+histRelCum = function(x,L){
+  h = hist(x, breaks = L, right = FALSE , plot = FALSE)
+  h$density = cumsum(h$counts)/length(x)
+  plot(h, freq = FALSE, 
+      main = "Histograma de frec. rel. acumuladas\n y curva de distribución estimada", 
+      xaxt = "n", col = "lightgray", xlab = "Intervalos", 
+      ylab = "Frec. relativas acumuladas") 
+  axis(1, at = L)
+  text(h$mids, h$density/2, labels = round(h$density ,2), col = "blue")
+  dens.x = density(x)
+  dens.x$y = cumsum(dens.x$y)*(dens.x$x[2]-dens.x$x[1]) 
+  lines(dens.x,col = "purple",lwd = 2)
+}
+```
+
+```{r}
+histRelCum(cw, L)
+```
+
+
+
+
+
+
