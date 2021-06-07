@@ -1,0 +1,25 @@
+---
+title: "S15 153 El coeficiente de determinación"
+author: "Pedro Biel"
+date: "16/3/2021"
+output: html_document
+---
+
+```{r}
+body = read.table('../S15 T10 Introducción a la regresión lineal/bodyfat.txt', header = TRUE)
+head(body, 3)
+```
+
+```{r}
+body2 = body[, c(2, 4)]
+names(body2) = c('Grasa', 'Peso')
+str(body2)
+```
+
+```{r}
+summary(lm(Peso ~ Grasa, data = body2))$r.squared
+```
+
+En este caso, hemos obtenido un coeficiente de determinación de 0.3751, cosa que confirma que la recta de regresión no aproxima nada bien nuestros datos.
+
+

@@ -1,0 +1,42 @@
+---
+title: 'S15 155 Ejercicio: relaciones exponenciales'
+author: "Pedro Biel"
+date: "16/3/2021"
+output: html_document
+---
+
+# Ejemplo 2
+
+En este caso trabajaremos no con un data frame, sino directamente con los dos vectores siguientes
+
+```{r}
+dep = c(1.2, 3.6, 12, 36)
+ind = c(20, 35, 61, 82)
+plot(ind, dep, main = 'Escala lineal')
+plot(ind, dep, log = 'y', main = 'Escala semilogarítmica')
+```
+
+```{r}
+lm(log10(dep) ~ ind)
+```
+
+```{r}
+summary(lm(log10(dep) ~ ind))$r.squared
+```
+
+Lo que acabamos de obtener es que
+
+$$log(dep)=0.023⋅ind−0.3$$
+
+es una buena aproximación de nuestros datos.
+
+Con lo cual
+
+$$dep=10^{0.023⋅ind}⋅10^{−0.33}=1.054^{ind}⋅0.468$$
+
+
+```{r}
+plot(ind, dep, main = 'Curva de regresión')
+curve(1.054^x * 0.468, add = TRUE, col = 'purple')
+```
+
