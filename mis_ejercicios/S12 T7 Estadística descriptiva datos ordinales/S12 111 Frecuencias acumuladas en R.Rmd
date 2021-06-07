@@ -1,0 +1,59 @@
+---
+title: "Estadística descriptiva con datos ordinales"
+author: "Pedro Biel"
+date: "25/2/2021"
+output: html_document
+---
+
+# Ejemplo 2. Frecuencia relativa acumulada
+
+```{r}
+notas = ordered(
+  c("S", "A", "N", "Ex", "S", "S", "Ex", "Ex", "N", "A", "A", "A", 
+    "A", "N", "S"),
+  levels = c("S", "A", "N", "Ex")
+)
+```
+
+## Frecuencias absolutas
+
+```{r}
+fAbs = table(notas)
+```
+
+## Frecuencias absolutas acumuladas
+
+```{r}
+cumsum(fAbs)
+```
+
+## Frecuencias relativas
+
+```{r}
+prop.table(fAbs)
+```
+
+
+## Frecuencias relativas acumuladas
+
+```{r}
+cumsum(prop.table(fAbs))
+```
+
+## Diagram de barras de frecuencias absolutas
+
+```{r}
+barplot(fAbs, main = 'Diagrama de barras de frecuencias absolutas')
+```
+
+## Diagram de barras de frecuencias absolutas acumuladas
+
+```{r}
+barplot(cumsum(fAbs), main = 'Diagrama de barras de frecuencias absolutas acumuladas')
+```
+
+## Diagram de barras de frecuencias relativas acumuladas
+
+```{r}
+barplot(cumsum(prop.table(fAbs)), main = 'Diagrama de barras de frecuencias relativas acumuladas')
+```

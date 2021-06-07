@@ -1,0 +1,44 @@
+---
+title: "Estadística descriptiva con datos ordinales"
+author: "Pedro Biel"
+date: "25/2/2021"
+output: html_document
+---
+
+# Ejemplo 1. Frecuencuencia acumulada
+
+```{r}
+notas = ordered(
+  c("S", "A", "N", "Ex", "S", "S", "Ex", "Ex", "N", "A", "A", "A", 
+    "A", "N", "S"),
+  levels = c("S", "A", "N", "Ex")
+)
+table(notas)
+```
+
+# Ejemplo 2. Frecuencia relativa acumulada
+
+```{r}
+set.seed(2018)
+clientes = sample(1:5, 50, replace = TRUE)
+clientes
+```
+
+```{r}
+set.seed(NULL)
+```
+
+```{r}
+table(clientes)
+```
+
+```{r}
+12/50
+11/50
+5/50
+10/50
+```
+```{r}
+0.24 + 0.24 + 0.22 + 0.1 + 0.2
+```
+
