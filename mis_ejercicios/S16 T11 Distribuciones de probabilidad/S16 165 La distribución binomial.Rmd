@@ -1,0 +1,39 @@
+---
+title: "Distribución binomial"
+author: "Pedro Biel"
+date: "17/3/2021"
+output: html_document
+---
+
+# Función de densidad
+
+$$f(k) = \binom{n}{k} p^k (1-p)^{n-p},\ k \in \{0, 1\}$$
+
+# En R
+
+Sea $X = B(n = 30, p = 0.6)$
+
+```{r}
+n = 30
+p = 0.6
+dbinom(0:n, size = n, prob = p)  # Probabilidad de sacar entre 0 y 30 éxitos usando una muestra de tamaño n y la probabilidad p.
+plot(0:n, dbinom(0:n, size = n, prob = p))
+plot(0:n, pbinom(0:n, size = n, prob = p))  # Probabilidad acumulada.
+qbinom(0.5, n, p)  # Mediana (cuantil 0.5).
+qbinom(0.25, n, p)  # 1er cuantil.
+rbinom(1000, n, p) -> data  # 1000 números aleatorios.
+hist(data)
+hist(rbinom(100000, n, p), breaks = 0:30)
+```
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+---
+title: "Distribución de Poisson"
+author: "Pedro Biel"
+date: "18/3/2021"
+output: html_document
+---
+
+Supongamos que $X$ modela el nº de errores por página que tiene un valor esperado de $\lambda = 5$.
+
+```{r}
+l = 5
+dpois(x = 0:10, lambda = l)
+```
+
+Probabilidad de 0 errores en una página es 0.006737947.
+
+Probabilidad de 1 error en una página es 0.033689735 
+
+```{r}
+plot(0:20, dpois(x = 0:20, lambda = l))
+```
+
+```{r}
+ppois(0:20, l)  # Acumulada
+```
+
+```{r}
+qpois(0.5, l)  # Mediana (cuantil 0.5)
+```
+
+```{r}
+rpois(1000, lambda = l) -> data
+hist(data)
+```
+
+Unas 50 páginas no tienen ningún error.
+
+Unas 80 páginas tienen 1 error.
+
+

@@ -1,0 +1,36 @@
+---
+title: "Distribución de Bernoulli"
+author: "Pedro Biel"
+date: "17/3/2021"
+output: html_document
+---
+
+# Función de densidad
+
+$$f(k) = p^k (1-p)^{1-p},\ k \in \{0, 1\}$$
+
+Sea $X = Be(p = 0.7)$, la distribución que modela la probabilidad de obtener una cara usando una moneda trucada.
+
+```{r}
+library(Rlab)
+dbern(0, prob = 0.7)  # Probabilidad de sacar 0.
+dbern(1, prob = 0.7)  # Probabilidad de sacar 1.
+pbern(0, prob = 0.7)  # Fumción de distribución acumulada en 0.
+pbern(1, prob = 0.7)  # Fumción de distribución acumulada en 1.
+qbern(0.5, prob = 0.7)  # Mediana (cuantil 0.5).
+qbern(0.25, prob = 0.7)  # 1er cuantil.
+rbern(100, prob = 0.7) -> data  # 100 números aleatorios.
+hist(data)
+```
+
+
+
+
+
+
+
+
+
+
+
+

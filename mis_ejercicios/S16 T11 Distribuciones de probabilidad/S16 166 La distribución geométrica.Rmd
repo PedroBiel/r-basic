@@ -1,0 +1,50 @@
+---
+title: "Distribución geométrica"
+author: "Pedro Biel"
+date: "18/3/2021"
+output: html_document
+---
+
+# Función de densidad
+
+Sea $X = Geom(p=0.1)$ la distribución que modela la probabilidad de abrir una puerta hasta conseguirlo (1/10).
+
+$$f(k) = (1 - p)^{k - 1} · p \ \ \text{(se cuentan los intentos)}$$
+
+```{r}
+import(Rlab)
+p = 0.1
+plot(0:10, dgeom(0:10, p))
+```
+
+La probabilidad de acertar a la primera sería (0 fracasos) sería 0.1.
+
+La probabilidad de acertar a la segunda sería (1 fracaso) sería 0.09.
+
+```{r}
+plot(0:10, pgeom(0:10, p), ylim = c(0:1))
+```
+
+```{r}
+qgeom(0.5, p)  # Cuantil 0.5
+```
+
+Con 6 intentos es más probable haber abierto la puerta.
+
+```{r}
+qgeom(0.75, p)  # 3er vuantil 0.75
+```
+
+Con 13 intentos es el doble de probable haber abierto la puerta que con 6 intentos.
+
+
+```{r}
+rgeom(10, p)
+```
+
+Los intentos que ha tenido que hacre cada vez antes de abrir la puerta.
+
+```{r}
+hist(rgeom(10000, p))
+```
+

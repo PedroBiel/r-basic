@@ -1,0 +1,15 @@
+---
+title: "S16 172 Distribución exponencial"
+author: "Pedro Biel"
+date: "22/3/2021"
+output: html_document
+---
+
+No la hace en el curso. Ver python.
+
+
+
+
+
+
+

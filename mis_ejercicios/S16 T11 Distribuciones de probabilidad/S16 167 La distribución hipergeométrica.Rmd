@@ -1,0 +1,39 @@
+---
+title: "Distribución hipergeométrica"
+author: "Pedro Biel"
+date: "18/3/2021"
+output: html_document
+---
+
+Supongamos que tenemos 20 animales, de los cuales 7 son perros. Queremos medir la probabilidad de encontrar un nuúmero determinado de perros si elegimos $x = 12$ animales al azar.
+
+```{r}
+library(Rlab)
+M = 7  # Animales del tipo que queremos.
+N = 13  # Animales del tipo que no queremos.
+k = 12  # Nº de extraciones.
+
+dhyper(x = 0:12, m = M, n = N, k = k)
+```
+Probabilidad de sacar 0 perros es 0.0001031992.
+Probabilidad de sacar 1 perro es 0.0043343653.
+
+```{r}
+phyper(q = 0:12, m = M, n = N, k = k)
+```
+
+La mediana está entre 3 y 4 perors.
+
+```{r}
+qhyper(p = 0.5, m = M, n = N, k = k)  # Cuantiles
+```
+
+Mediana es 4 perros.
+
+```{r}
+rhyper(nn = 1000, m = M, n = N, k = k) -> data
+hist(data, breaks = 8)
+```
+
+
+

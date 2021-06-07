@@ -1,0 +1,39 @@
+---
+title: "S16 171 Distribución uniforme"
+author: "Pedro Biel"
+date: "22/3/2021"
+output: html_document
+---
+
+Supongamos que $X\sim U([0, 1])$ entonces podemos estudiar sus parámetros.
+
+```{r}
+a = 0
+b = 1
+dunif(0.5, min = a, max = b)
+
+x = seq(0, 1, 0.1)
+dunif(x, min = a, max = b)
+punif(x, a, b)
+
+```
+
+```{r}
+plot(x, dunif(x, min = a, max = b), type = 'l')
+```
+
+
+```{r}
+plot(x, punif(x, min = a, max = b), type = 'l')
+```
+
+```{r}
+qunif(0.5, a, b)  # Mediana
+```
+
+```{r}
+runif(10000, a, b) -> data
+hist(data)  # Todas las columnas son probablemente igual de altas.
+```
+
+
