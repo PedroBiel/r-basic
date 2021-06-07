@@ -1,0 +1,31 @@
+---
+title: "Insecticida"
+author: "Pedro Biel"
+date: "2/3/2021"
+output: html_document
+---
+
+# Análisis de spray insecticida
+
+Cargamos los datos del data ser de `R`llamado `Insectsprays`.
+```{r}
+data = InsectSprays
+head(data)
+str(data)
+```
+
+```{r}
+by(data$count, data$spray, FUN = summary)
+```
+
+Desviación típica:
+
+```{r}
+aggregate(count~spray, data = data, FUN = sd)
+```
+
+```{r}
+boxplot(count~spray, data = data, col = 'lightgreen',
+        xlab = 'Tipo de Spray', ylab = 'Insectos muertos')
+```
+

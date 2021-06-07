@@ -1,0 +1,87 @@
+---
+title: "Tarea 12 Estudio de las notas según carrera"
+author: "Pedro Biel"
+date: "2/3/2021"
+output: html_document
+---
+
+# Tarea 12
+
+Carga el conjunto de datos de la carpeta data llamado `grades.txt` en `R` y responde a las siguientes preguntas
+
+```{r}
+data = read.table('grades.txt', header = TRUE)
+head(data)
+tail(data)
+str(data)
+
+```
+
+
+## Preguntas de esta tarea
+
+### 1. Calcula la media, la mediana y la moda redondeada a dos cifras decimales de las notas numéricas de los exámenes tanto de forma conjunta como por estudio universitario. ¿En qué grupo observamos la nota más alta? ¿Qué grupo está por encima de la media de estudiantes?
+
+```{r}
+# Resultados de forma conjunta
+notas = data[, 2]
+round(mean(notas), 2)  # Media
+round(median(notas), 2)  # Mediana
+library(modeest)
+round(mfv(notas), 2)  # Moda
+```
+
+
+```{r}
+# Resultados por estudio universitario
+round(by(data$nota, data$estudio, FUN = mean), 2)  # Media
+#aggregate(nota~estudio, data = data, FUN = mean)  # Media
+round(by(data$nota, data$estudio, FUN = median), 2)  # Mediana
+#aggregate(nota~estudio, data = data, FUN = median)  # Mediana
+by(data$nota, data$estudio, FUN = mfv)  # Moda
+```
+
+```{r}
+by(data$nota, data$estudio, FUN = summary)
+```
+
+La nota más alta está en el grupo de estudiantes de Industrial.
+
+El grupo de estudiantes de Matemáticas tiene una media por encima de la media del total.
+
+### 2. ¿En qué grupo observamos más variación de notas? Justifica tu respuesta
+
+```{r}
+round(by(data$nota, data$estudio, FUN = sd), 2)
+```
+
+En el grupo de estudiantes de Matemáticas. La desviación estándar es mayor.
+
+### 3. ¿Hay mucha diferencia entre el grupo que has respondido en el ejercicio 1 y en el ejercicio 2? Intenta dar una explicación objetiva del suceso.
+
+Aunque en el grupo de estudiantes de Industrial el rango de notas es mayor, la desviación estándar es menor. La posibilidad mayor de encontrar una nota sería en el rango `nota media` $\pm$ `esviación estándar`. Al ser mayor la desviación estandar del grupo de estudiantes de Matemáticas el rango donde es más posible encontrar una nota es mayor.
+
+### 4. Dibuja en un único gráfico los cuatro diagramas de caja, uno para cada grupo. Añade así mismo la nota media, pon nombre, título y color al gráfico para documentar el gráfico correctamente.
+
+```{r}
+medias = aggregate(nota~estudio, data = data, FUN = mean)
+boxplot(
+  nota ~ estudio, 
+  data = data,
+  col = c('slategray', 'green', 'blue', 'yellow'),
+  main = 'Boxplot de notas según estudio universitario'
+  )
+points(medias, col = 'red', pch = 20)
+```
+
+### 5. ¿Observas algunos valores atípicos en el boxplot anterior? ¿A qué grupo pertence?
+
+En Industrial, Informática y Telemática hay notas que destacan por encima de los bigotes.
+
+### 6. Indica a partir del boxplot anterior en qué grupo observamos más variedad de notas.
+
+Matemáticas
+
+### 7. En base a todo lo anterior, ¿puedes afirmar de forma estadística que el examen de carrera ha ido mejor en algún estudio que en los demás? 
+
+En Matemáticas la media es superioe a los demás estudios, aunque la desviación estándar también los es. Hay más posibilidades de sacar una mejor nota, aunque las peores notas pueden ser como los de otros estudios.
