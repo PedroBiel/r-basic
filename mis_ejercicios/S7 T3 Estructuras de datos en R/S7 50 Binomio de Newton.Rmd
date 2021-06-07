@@ -1,0 +1,47 @@
+---
+title: "Binomio de Newton"
+author: "Pedro Biel"
+date: "25/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Producto notable
+
+La fórmula del producto notable es
+
+$$( a + b)^2 = a^2 + 2ab + b^2$$
+
+# Funcion con R
+
+```{r}
+binomioNewton2 = function(a, b){
+  a^2 + 2 * a * b + b^2
+}
+binomioNewton2(1, 2)
+binomioNewton2(2, 1)
+```
+
+# Binomio de Newton
+
+$$(a + b)^n = \sum_{k=0}^n {n \choose k} · a^{n - k} · b^k = {n \choose 0} · a^n · b^0 + \cdots + {n \choose n} · a^0 · b^n$$
+
+```{r}
+binomioNewton = function(a, b, n){
+  cumsum(choose(n, (0:n)) * a^(n - (0:n)) * b^(0:n))
+}
+binomioNewton(2, 1, 2)
+```
+
+Salen 3 números que son los de la suma acumulada \cumsum. Solo nos interesa el número final.
+
+```{r}
+binomioNewton_ = function(a, b, n){
+  cumsum(choose(n, (0:n)) * a^(n - (0:n)) * b^(0:n))[n + 1]
+}
+binomioNewton_(2, 1, 2)
+```
+

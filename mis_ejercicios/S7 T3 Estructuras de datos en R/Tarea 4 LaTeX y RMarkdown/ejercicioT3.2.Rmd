@@ -1,0 +1,157 @@
+---
+title: "Ejercicios sobre LaTeX, R y Markdown"
+author: "Pedro Biel"
+date: "1/2/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Preguntas
+
+### Pregunta 1
+
+Realizad los siguientes productos de matrices siguiente en $R$:
+
+$$A \cdot B$$
+$$B \cdot A$$
+$$(A \cdot B)^t$$
+$$B^t \cdot A$$
+$$(A \cdot B)^{-1}$$
+$$A^{-1} \cdot B^t$$
+donde
+
+$$ A = 
+ \begin{pmatrix}
+  1 & 2 & 3 & 4 \\
+  4 & 3 & 2 & 1 \\
+  0 & 1 & 0 & 2 \\
+  3 & 0 & 4 & 0
+ \end{pmatrix}
+ \quad
+ B = 
+ \begin{pmatrix}
+  4 & 3 & 2 & 1 \\
+  0 & 3 & 0 & 4 \\
+  1 & 2 & 3 & 4 \\
+  0 & 1 & 0 & 2
+ \end{pmatrix}$$
+
+Finalmente, escribe haciendo uso de $\LaTeX$ el resultado de los dos primeros productos de forma adecuada.
+
+```{r pregunta 1}
+A = matrix(c(1, 2, 3, 4, 4, 3, 2, 1, 0, 1, 0, 2, 3, 0, 4, 0), nrow = 4, byrow = TRUE)
+B = matrix(c(4, 3, 2, 1, 0, 3, 0, 4, 1, 2, 3, 4, 0, 1, 0, 2), nrow = 4, byrow = TRUE)
+A %*% B
+B %*% A
+#mtx.exp(A %*% B, t)
+#mtx.exp(B, t) %*% A
+#mtx.exp(A %*% B, -1)
+#mtx.exp(A, t) %*% mtx.exp(B, t)
+```
+
+$$A \cdot B = \begin{pmatrix}
+  7 & 19 & 11 & 29 \\
+ 18 & 26 & 14 & 26 \\
+  0 &  5 &  0 &  8 \\
+ 16 & 17 & 18 & 19
+ \end{pmatrix}$$
+
+$$B \cdot A = \begin{pmatrix}
+ 19 & 19 & 22 & 23 \\
+ 24 &  9 & 22 &  3 \\
+ 21 & 11 & 23 & 12 \\
+ 10 &  3 & 10 &  1
+ \end{pmatrix}$$
+
+### Pregunta 2
+
+Considerad en un vector los números de vuestro DNI y llamadlo `dni`. Por ejemplo, si vuestro DNI es
+54201567K, vuestro vector será
+
+$$dni = (5, 4, 2, 0, 1, 5, 6, 7)$$
+.
+
+Definid el vector en $R$. Calculad con $R$ el vector `dni` al cuadrado, la raíz cuadrada del vector `dni` y, por último,
+la suma de todas las cifras del vector `dni`.
+
+Finalmente, escribid todos estos vectores también a $\LaTeX$.
+
+```{r pregunta 2}
+dni = c(1, 5, 2, 5, 6, 7, 8, 7)
+cuadrado = function(n){n^2}
+sapply(dni, FUN = cuadrado)
+sqrt(dni)
+sum(dni)
+```
+
+Cuadrado de cada uno de los elementos del vetor:
+
+$$dni^2 = (1, 25, 4, 25, 36, 49, 64, 49)$$
+
+Raíz cuadrada de cada uno de los elementos del vetor:
+
+$$\sqrt{dni} = (1.000000, 2.236068, 1.414214, 2.236068, 2.449490, 2.645751, 2.828427, 2.645751)$$
+
+Suma de los elementos del vector:
+
+$$\sum_{i=1}^{6} dni_i = 41$$
+
+### Pregunta 3
+
+Considerad el vector de las letras de vuestro nombre y apellido. Llamadlo name. Por ejemplo, en mi caso sería
+
+$$nombre = (M, A,R, I, A, S, A, N, T, O, S)$$
+.
+
+Definid dicho vector en $R$. Calculad el subvector que solo contenga vuestro nombre. Calculad también el
+subvector que contenga solo vuestro apellido. Ordenadlo alfabéticamente. Cread una matriz con este vector.
+
+Redactad todos vuestros resultados y utilizad $\LaTeX$ cuando pertoque.
+
+
+```{r pregunta 3}
+nombre_apellido = c("P", "E", "D", "R", "O", "B", "I", "E", "L")
+nombre = nombre_apellido[1:5]
+apellido = nombre_apellido[6:9]
+sort_nombre = sort(nombre)
+sort_apellido = sort(apellido)
+nombre
+apellido
+sort_nombre
+sort_apellido
+M = rbind(sort_nombre, sort_apellido)
+M
+```
+
+Vector con el nombre y apellido:
+
+$$\text{nombre_apellido} = (P, E, D, R, O, B, I, E, L)$$
+
+Vector con el nombre:
+
+$$\text{nombre} = (P, E, D, R, O)$$
+
+Vector con el apellido:
+
+$$\text{apellido} = (B, I, E, L)$$
+
+Vector con las letras del nombre ordenadas alfabéticamente:
+
+$$\text{sort_nombre} = (D, E, O, P, R)$$
+
+Vector con las letras del apellido ordenadas alfabéticamente:
+
+$$\text{sort_apellido} = (B, E, I, L,)$$
+
+Matriz con los vetores de nombre y apellido orednados alfabéticamente:
+
+$$M = \begin{pmatrix}
+ D & E & O & P & R  \\
+ B & E & I & L & B
+ \end{pmatrix}$$
